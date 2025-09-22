@@ -1,68 +1,168 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* === 🎨 Paleta Principal === */
+  --color-blue: #2563eb;         /* Azul vibrante */
+  --color-blue-dark: #1e40af;    /* Azul escuro */
+  --color-orange: #fb923c;       /* Laranja suave */
+  --color-orange-dark: #ea580c;  /* Laranja escuro */
+  --color-bg: #f1f5f9;           /* Fundo geral */
+  --color-bg-card: #ffffff;      /* Fundo de cards */
+  --color-text: #1e293b;         /* Texto padrão */
+  --color-muted: #64748b;        /* Texto secundário */
+
+  --font-sans: "Inter", "Segoe UI", system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  font-family: var(--font-sans);
+  line-height: 1.7;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 
-  font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* === Links === */
 a {
+  color: var(--color-blue);
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
+  transition: color 0.25s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-orange-dark);
 }
 
+/* === Corpo da página === */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+/* === Títulos === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--color-blue-dark);
+  margin-top: 0;
+}
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.8rem;
+}
+h2 {
+  font-size: 2.2rem;
+}
+h3 {
+  font-size: 1.6rem;
 }
 
+/* === Parágrafos e texto === */
+p {
+  margin: 0.5em 0;
+  color: var(--color-muted);
+}
+
+/* === Botões === */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  padding: 0.8em 1.8em;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(to right, var(--color-blue), var(--color-orange));
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 button:hover {
-  border-color: #646cff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:focus {
+  outline: 3px solid var(--color-orange);
+  outline-offset: 2px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* === Cards === */
+.card {
+  background: var(--color-bg-card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* === Cabeçalho === */
+header {
+  background: var(--color-blue);
+  color: #fff;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+/* === Rodapé === */
+footer {
+  background: var(--color-orange);
+  color: #fff;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: auto;
+}
+
+/* === Layouts === */
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem;
+}
+
+/* === Responsividade === */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 2.4rem;
   }
-  a:hover {
-    color: #747bff;
+  h2 {
+    font-size: 1.8rem;
+  }
+  .container {
+    padding: 1rem;
   }
   button {
-    background-color: #f9f9f9;
+    width: 100%;
+  }
+}
+
+/* === Dark Mode (automático) === */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1e293b;
+    --color-bg-card: #334155;
+    --color-text: #f1f5f9;
+    --color-muted: #cbd5e1;
+  }
+  body {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  }
+  header {
+    background: var(--color-blue-dark);
+  }
+  footer {
+    background: var(--color-orange-dark);
+  }
+  .card {
+    background: var(--color-bg-card);
   }
 }

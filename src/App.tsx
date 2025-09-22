@@ -3,6 +3,7 @@ import { useRoutes } from "react-router-dom";
 import { routes } from "./routes";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import "./index.css";  
 
 export default function App() {
   // Exemplo de hook para exibir um loading inicial
