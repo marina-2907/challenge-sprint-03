@@ -1,16 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
-export function Header() {
+export function Header(){
+  const navigate = useNavigate()
+  const nav = (to: string, label: string) => (
+    <NavLink
+      to={to}
+      className={({isActive}) =>
+        `px-3 py-2 rounded-xl hover:bg-blue-50 ${isActive ? 'text-accent font-semibold' : 'text-gray-700'}`
+      }>
+      {label}
+    </NavLink>
+  )
+
   return (
-    <header className="bg-gradient-to-r from-orange-500 to-blue-600 text-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between p-4">
-        <Link to="/" className="text-2xl font-bold">IMREA Telemedicina</Link>
-        <nav className="space-x-6">
-          <Link to="/" className="hover:underline">Home</Link>
-          <Link to="/about" className="hover:underline">Sobre</Link>
-          <Link to="/contact" className="hover:underline">Contato</Link>
+    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
+      <div className="container py-3 flex items-center gap-4">
+        <Link to="/" className="text-xl font-bold text-brand">IMREA Telemedicina</Link>
+        <nav className="ml-auto flex items-center gap-2">
+          {nav('/','Home')}
+          {nav('/about','Sobre')}
+          {nav('/team','Integrantes')}
+          {nav('/faq','FAQ')}
+          {nav('/contact','Contato')}
+          <button onClick={()=>navigate('/results')} className="btn-accent ml-2">Resultados</button>
+          <NavLink to="/login" className="px-3 py-2 rounded-xl hover:bg-blue-50">Login</NavLink>
         </nav>
       </div>
     </header>
-  );
+  )
 }
