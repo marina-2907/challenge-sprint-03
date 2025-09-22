@@ -12,11 +12,6 @@ export function Home(){
         <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
           Atendimento online humanizado e seguro — agende consultas, acesse resultados e fale com nossos profissionais.
         </p>
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          <button onClick={()=>setOpen('agendar')} className="btn-primary">Agendar Consulta</button>
-          <button onClick={()=>setOpen('chat')} className="btn-accent">Nosso Chat</button>
-          <button onClick={()=>setOpen('resultados')} className="btn-secondary border px-5 py-3 rounded-xl">Resultados</button>
-        </div>
       </section>
 
       <section className="pb-12">

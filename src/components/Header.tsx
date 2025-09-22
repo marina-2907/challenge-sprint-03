@@ -1,34 +1,30 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import "./index.css"; // vamos criar esse CSS abaixo
 
-
-
-
-export function Header(){
-  const navigate = useNavigate()
-  const nav = (to: string, label: string) => (
-    <NavLink
-      to={to}
-      className={({isActive}) =>
-        `px-3 py-2 rounded-xl hover:bg-blue-50 ${isActive ? 'text-accent font-semibold' : 'text-gray-700'}`
-      }>
-      {label}
-    </NavLink>
-  )
-
+export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b">
-      <div className="container py-3 flex items-center gap-4">
-        <Link to="/" className="text-xl font-bold text-brand">IMREA Telemedicina</Link>
-        <nav className="ml-auto flex items-center gap-2">
-          {nav('/','Home')}
-          {nav('/about','Sobre')}
-          {nav('/team','Integrantes')}
-          {nav('/faq','FAQ')}
-          {nav('/contact','Contato')}
-          <button onClick={()=>navigate('/results')} className="btn-accent ml-2">Resultados</button>
-          <NavLink to="/login" className="px-3 py-2 rounded-xl hover:bg-blue-50">Login</NavLink>
-        </nav>
+    <header className="header-container">
+      <div className="header-left">
+        <Link to="/">
+          <img src="public/imgs/image imrea 2.png" alt="Logo HC" />
+        </Link>
+        <Link to="/">
+          <img src="public/imgs/NOVO-LOGO-HC-2022.png" alt="Logo IMREA" />
+        </Link>
+      </div>
+
+      <nav className="header-nav">
+        <Link to="/agendar" className="nav-btn">Agendar Consulta</Link>
+        <Link to="/chat" className="nav-btn">Nosso Chat</Link>
+        <Link to="/resultados" className="nav-btn">Resultados</Link>
+        <Link to="/contato" className="nav-btn">Contato</Link>
+      </nav>
+
+      <div className="header-right">
+        <Link to="/login" className="login-icon">
+          <i className="fa-solid fa-user"></i>
+        </Link>
       </div>
     </header>
-  )
+  );
 }

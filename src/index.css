@@ -1,168 +1,211 @@
-:root {
-  /* === 🎨 Paleta Principal === */
-  --color-blue: #2563eb;         /* Azul vibrante */
-  --color-blue-dark: #1e40af;    /* Azul escuro */
-  --color-orange: #fb923c;       /* Laranja suave */
-  --color-orange-dark: #ea580c;  /* Laranja escuro */
-  --color-bg: #f1f5f9;           /* Fundo geral */
-  --color-bg-card: #ffffff;      /* Fundo de cards */
-  --color-text: #1e293b;         /* Texto padrão */
-  --color-muted: #64748b;        /* Texto secundário */
-
-  --font-sans: "Inter", "Segoe UI", system-ui, Avenir, Helvetica, Arial, sans-serif;
-
-  font-family: var(--font-sans);
-  line-height: 1.7;
-  font-weight: 400;
-
-  color: var(--color-text);
-  background-color: var(--color-bg);
-
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* === Links === */
-a {
-  color: var(--color-blue);
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-a:hover {
-  color: var(--color-orange-dark);
-}
-
-/* === Corpo da página === */
-body {
+/* ===========================
+   🌐 GLOBAL RESET
+   =========================== */
+* {
   margin: 0;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 100%);
+  color: #1f2937; /* gray-800 */
   min-height: 100vh;
+}
+
+/* Links padrão */
+a {
+  text-decoration: none;
+  color: #2563eb; /* azul */
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f97316; /* laranja */
+}
+
+/* ===========================
+   🏠 LAYOUT
+   =========================== */
+/* ===== HEADER LAYOUT ===== */
+.header-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  background-color: #0450a1; /* azul do topo */
+  height: 72px;
 }
 
-/* === Títulos === */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  color: var(--color-blue-dark);
-  margin-top: 0;
-}
-h1 {
-  font-size: 2.8rem;
-}
-h2 {
-  font-size: 2.2rem;
-}
-h3 {
-  font-size: 1.6rem;
+/* Logos lado a lado no canto esquerdo */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* espaçamento entre as duas imagens */
 }
 
-/* === Parágrafos e texto === */
-p {
-  margin: 0.5em 0;
-  color: var(--color-muted);
+.header-left img {
+  height: 40px;  /* tamanho das logos */
+  width: auto;
+  transition: transform 0.2s ease;
 }
 
-/* === Botões === */
-button {
-  padding: 0.8em 1.8em;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(to right, var(--color-blue), var(--color-orange));
+.header-left img:hover {
+  transform: scale(1.05);
+}
+
+/* Navegação central */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-btn {
+  padding: 0.4rem 1.2rem;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  font-weight: bold;
   color: #fff;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-button:focus {
-  outline: 3px solid var(--color-orange);
-  outline-offset: 2px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-/* === Cards === */
+.nav-btn:hover {
+  background-color: #fff;
+  color: #0450a1;
+}
+
+/* Ícone de login à direita */
+.header-right .login-icon {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  padding: 0.4rem 0.55rem;
+  color: #fff;
+  font-size: 1.3rem;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.header-right .login-icon:hover {
+  background-color: #fff;
+  color: #0450a1;
+}
+
+footer {
+  background: #1e3a8a;
+  color: #f1f5f9;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* ===========================
+   🎯 BUTTONS
+   =========================== */
+.btn-primary {
+  background: linear-gradient(90deg, #2563eb, #1e40af);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(90deg, #f97316, #ea580c);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+}
+
+/* ===========================
+   📝 FORMS
+   =========================== */
+form {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+}
+
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+}
+
+/* ===========================
+   🖼️ CARDS
+   =========================== */
 .card {
-  background: var(--color-bg-card);
-  border-radius: 16px;
-  padding: 1.5rem;
-  margin: 1rem 0;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  padding: 2rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(249,115,22,0.3); /* laranja brilho */
 }
 
-/* === Cabeçalho === */
-header {
-  background: var(--color-blue);
-  color: #fff;
-  padding: 1rem 2rem;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-}
-
-/* === Rodapé === */
-footer {
-  background: var(--color-orange);
-  color: #fff;
-  padding: 1rem 2rem;
-  text-align: center;
-  font-size: 0.95rem;
-  margin-top: auto;
-}
-
-/* === Layouts === */
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 2rem;
-}
-
-/* === Responsividade === */
+/* ===========================
+   📱 RESPONSIVIDADE
+   =========================== */
 @media (max-width: 1024px) {
-  h1 {
-    font-size: 2.4rem;
-  }
-  h2 {
-    font-size: 1.8rem;
-  }
-  .container {
-    padding: 1rem;
-  }
-  button {
-    width: 100%;
+  header nav {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
-/* === Dark Mode (automático) === */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1e293b;
-    --color-bg-card: #334155;
-    --color-text: #f1f5f9;
-    --color-muted: #cbd5e1;
-  }
+@media (max-width: 768px) {
   body {
-    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    font-size: 15px;
   }
+
+  .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+
+  form {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
   header {
-    background: var(--color-blue-dark);
+    flex-direction: column;
+    gap: 1rem;
   }
-  footer {
-    background: var(--color-orange-dark);
-  }
+
   .card {
-    background: var(--color-bg-card);
+    padding: 1.5rem;
   }
 }
