@@ -4,12 +4,10 @@ import { FaArrowLeft, FaArrowRight, FaUniversalAccess } from 'react-icons/fa'
 
 export function Home() {
   const [open, setOpen] = useState<null | 'agendar' | 'chat' | 'resultados'>(null)
-  const slides = [
-    'public/videos/video 1.mp4',
-  ]
+  const slides = ['public/videos/video 1.mp4']
   const [current, setCurrent] = useState(0)
 
-  // troca automática de imagem
+  // troca automática de imagem no hero
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
@@ -20,24 +18,75 @@ export function Home() {
   const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
   const nextSlide = () => setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
 
-  // 👉 injeta o widget de acessibilidade acsbapp
+  // estados de acessibilidade
+  const [panelOpen, setPanelOpen] = useState(false)
+  const [highContrast, setHighContrast] = useState(false)
+  const [largeFont, setLargeFont] = useState(false)
+
+  // aplica classes no <body> para alto contraste e fonte grande
+  useEffect(() => {
+    document.body.classList.toggle('high-contrast', highContrast)
+  }, [highContrast])
+
+  useEffect(() => {
+    document.body.classList.toggle('large-font', largeFont)
+  }, [largeFont])
+
+  // injeta o script externo do acsbapp (opcional)
   useEffect(() => {
     const s = document.createElement('script')
     s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'
     s.async = true
     s.onload = () => {
-      
+      // se precisar inicializar algo do acsbapp, faça aqui
     }
     document.body.appendChild(s)
-
-    // remove o script ao desmontar (boa prática)
-    return () => {
-      document.body.removeChild(s)
-    }
+    return () => { document.body.removeChild(s) }
   }, [])
 
   return (
     <main className="Hero">
+
+      {/* ===== Painel de Acessibilidade ===== */}
+      <div className="accessibility-container">
+        <button
+          className="accessibility-btn"
+          aria-label="Abrir opções de acessibilidade"
+          onClick={() => setPanelOpen((prev) => !prev)}
+        >
+          <FaUniversalAccess size={28} />
+        </button>
+
+        {panelOpen && (
+          <div className="accessibility-panel" role="dialog" aria-label="Configurações de acessibilidade">
+            <h3>Opções de Acessibilidade</h3>
+
+            <button
+              onClick={() => setHighContrast(!highContrast)}
+              aria-pressed={highContrast}
+              className="accessibility-option"
+            >
+              {highContrast ? 'Desativar Alto Contraste' : 'Ativar Alto Contraste'}
+            </button>
+
+            <button
+              onClick={() => setLargeFont(!largeFont)}
+              aria-pressed={largeFont}
+              className="accessibility-option"
+            >
+              {largeFont ? 'Fonte Padrão' : 'Fonte Grande'}
+            </button>
+
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="accessibility-option"
+            >
+              Ir para o topo
+            </button>
+          </div>
+        )}
+      </div>
+
       {/* ===== Hero com carrossel ===== */}
       <section className="hero-carousel">
         <div
@@ -56,26 +105,43 @@ export function Home() {
 
         <button className="hero-arrow left" onClick={prevSlide}><FaArrowLeft /></button>
         <button className="hero-arrow right" onClick={nextSlide}><FaArrowRight /></button>
-
-        {/* Botão de acessibilidade fixo (ícone visual) */}
-        <button className="accessibility-btn" aria-label="Abrir opções de acessibilidade">
-          <FaUniversalAccess size={28} />
-        </button>
       </section>
 
-      {/* ===== Cards de serviços ===== */}
-      <section className="grid md:grid-cols-3 gap-6 services-list">
-        {[
-          { title: 'Agendamento Online', icon: '📅', desc: 'Marque sua consulta com confirmação.' },
-          { title: 'Chat com Profissionais', icon: '💬', desc: 'Converse em tempo real para tirar dúvidas.' },
-          { title: 'Resultados Online', icon: '📄', desc: 'Acesse exames e laudos com segurança.' },
-        ].map(card => (
-          <article key={card.title} className="card text-center">
-            <div className="text-3xl">{card.icon}</div>
-            <h3 className="mt-3 text-xl font-semibold">{card.title}</h3>
-            <p className="mt-2 text-gray-600">{card.desc}</p>
-          </article>
-        ))}
+      {/* ===== Seção de Serviços ===== */}
+      <section className="services-pro">
+        <div className="services-header">
+          <h2>Nossos Serviços</h2>
+          <p>
+            Atendimento de qualidade para você e sua família, com tecnologia e segurança.
+          </p>
+        </div>
+
+        <div className="services-grid-pro">
+          {[
+            {
+              title: 'Agendamento Online',
+              icon: '📅',
+              desc: 'Agende consultas e procedimentos em poucos cliques. Confirmação imediata e lembretes automáticos para evitar esquecimentos.',
+            },
+            {
+              title: 'Chat com Profissionais',
+              icon: '💬',
+              desc: 'Fale com nossa equipe em tempo real para esclarecer dúvidas e receber orientações de forma segura e confidencial.',
+            },
+            {
+              title: 'Resultados Online',
+              icon: '📄',
+              desc: 'Acesse laudos e exames com login protegido, podendo compartilhar com seu médico ou salvar para acompanhar seu histórico.',
+            },
+          ].map((card) => (
+            <article key={card.title} className="service-card-pro">
+              <div className="service-icon-pro">{card.icon}</div>
+              <h3>{card.title}</h3>
+              <p>{card.desc}</p>
+              <button className="service-btn-pro">Saiba mais</button>
+            </article>
+          ))}
+        </div>
       </section>
 
       {/* ===== Modais ===== */}
@@ -94,25 +160,57 @@ export function Home() {
         <a className="text-accent underline" href="/results">Abrir Resultados</a>
       </Modal>
 
-
-{/* ===== Seção Alunos ===== */}
-      <section className="students-section">
+      {/* ===== Seção Alunos ===== */}
+      <section className="students-section" aria-label="Equipe de alunos do projeto">
         <h2>Nosso Time de Alunos</h2>
         <div className="students-grid">
           {[
-            { name: 'Bruno Vinicius Barbosa', role: '566366 / 1TDSPY', img: '/imgs/aluno1.jpeg' },
-            { name: 'João Pedro Bitencourt Goldoni', role: '564339 / 1TDSPX', img: '/imgs/aluno2.jpg' },
-            { name: 'Marina Tamagnini Magalhães', role: '561786 / 1TDSPX', img: '/imgs/aluno3.jpg' },
+            {
+              name: 'Bruno Vinicius Barbosa',
+              rm: '566366 / 1TDSPY',
+              img: '/imgs/aluno1.jpeg',
+              linkedin: 'https://www.linkedin.com/in/brunovbarbosaa',
+              github: 'https://github.com/brunovinicius02',
+            },
+            {
+              name: 'João Pedro Bitencourt Goldoni',
+              rm: '564339 / 1TDSPX',
+              img: '/imgs/aluno2.jpg',
+              linkedin: 'https://www.linkedin.com/in/joaopedrogoldoni?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+              github: 'https://github.com/JoaoPedroBitencourtGoldoni',
+            },
+            {
+              name: 'Marina Tamagnini Magalhães',
+              rm: '561786 / 1TDSPX',
+              img: '/imgs/aluno3.jpg',
+              linkedin: 'https://www.linkedin.com/in/marina-t-36b14328b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app',
+              github: 'https://github.com/marina-2907/marina',
+            },
           ].map((aluno) => (
-            <div key={aluno.name} className="student-card">
-              <img src={aluno.img} alt={aluno.name} />
-              <h3>{aluno.name}</h3>
-              <p>{aluno.role}</p>
+            <div className="student-card" key={aluno.name}>
+              <img src={aluno.img} alt={`Foto de ${aluno.name}`} className="profile-pic" />
+              <span className="profile-name">{aluno.name}</span>
+              <span className="profile-rm">{aluno.rm}</span>
+              <div className="social-links">
+                <a href={aluno.linkedin} target="_blank" rel="noreferrer">
+                  <img
+                    src="https://th.bing.com/th/id/OIP.wXu7EemBf_zTRrcepkjkAQHaHa?cb=iwc2&w=1920&h=1920&rs=1&pid=ImgDetMain"
+                    alt="LinkedIn"
+                    className="icon"
+                  />
+                </a>
+                <a href={aluno.github} target="_blank" rel="noreferrer">
+                  <img
+                    src="https://th.bing.com/th/id/R.7a864f07681f187fb572468bfc949977?rik=3fUik6Pc6xTrHQ&pid=ImgRaw&r=0"
+                    alt="GitHub"
+                    className="icon"
+                  />
+                </a>
+              </div>
             </div>
           ))}
         </div>
       </section>
-
     </main>
   )
 }
