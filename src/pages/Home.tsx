@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Modal } from '../components/Modal'
-import { FaArrowLeft, FaArrowRight, FaUniversalAccess } from 'react-icons/fa'
 
 export function Home() {
   const [open, setOpen] = useState<null | 'agendar' | 'chat' | 'resultados'>(null)
-  const slides = ['public/videos/video 1.mp4']
+  const slides = [
+    'public/videos/video 1.mp4', // coloque o arquivo em public/videos/video1.mp4
+  ]
   const [current, setCurrent] = useState(0)
 
-  // troca automática de imagem no hero
+  // troca automática de vídeo (se no futuro tiver mais de 1 vídeo)
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
@@ -15,84 +16,31 @@ export function Home() {
     return () => clearInterval(timer)
   }, [slides.length])
 
-  const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1))
-  const nextSlide = () => setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1))
-
-  // estados de acessibilidade
-  const [panelOpen, setPanelOpen] = useState(false)
-  const [highContrast, setHighContrast] = useState(false)
-  const [largeFont, setLargeFont] = useState(false)
-
-  // aplica classes no <body> para alto contraste e fonte grande
-  useEffect(() => {
-    document.body.classList.toggle('high-contrast', highContrast)
-  }, [highContrast])
-
-  useEffect(() => {
-    document.body.classList.toggle('large-font', largeFont)
-  }, [largeFont])
-
-  // injeta o script externo do acsbapp (opcional)
+  // 👉 injeta o widget de acessibilidade acsbapp (opcional)
   useEffect(() => {
     const s = document.createElement('script')
     s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'
     s.async = true
-    s.onload = () => {
-      // se precisar inicializar algo do acsbapp, faça aqui
-    }
     document.body.appendChild(s)
-    return () => { document.body.removeChild(s) }
+    return () => {
+      document.body.removeChild(s)
+    }
   }, [])
 
   return (
     <main className="Hero">
-
-      {/* ===== Painel de Acessibilidade ===== */}
-      <div className="accessibility-container">
-        <button
-          className="accessibility-btn"
-          aria-label="Abrir opções de acessibilidade"
-          onClick={() => setPanelOpen((prev) => !prev)}
-        >
-          <FaUniversalAccess size={28} />
-        </button>
-
-        {panelOpen && (
-          <div className="accessibility-panel" role="dialog" aria-label="Configurações de acessibilidade">
-            <h3>Opções de Acessibilidade</h3>
-
-            <button
-              onClick={() => setHighContrast(!highContrast)}
-              aria-pressed={highContrast}
-              className="accessibility-option"
-            >
-              {highContrast ? 'Desativar Alto Contraste' : 'Ativar Alto Contraste'}
-            </button>
-
-            <button
-              onClick={() => setLargeFont(!largeFont)}
-              aria-pressed={largeFont}
-              className="accessibility-option"
-            >
-              {largeFont ? 'Fonte Padrão' : 'Fonte Grande'}
-            </button>
-
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="accessibility-option"
-            >
-              Ir para o topo
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* ===== Hero com carrossel ===== */}
+      {/* ===== Hero com vídeo de fundo ===== */}
       <section className="hero-carousel">
-        <div
-          className="hero-bg"
-          style={{ backgroundImage: `url(${slides[current]})` }}
-        ></div>
+        {/* 🎥 Vídeo de fundo */}
+        <video
+          key={slides[current]}
+          className="hero-video"
+          src={slides[current]}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
 
         <div className="hero-content">
           <h1>Telemedicina IMREA HC</h1>
@@ -102,9 +50,6 @@ export function Home() {
           </p>
           <button className="btn-hero">Clique aqui e saiba mais!</button>
         </div>
-
-        <button className="hero-arrow left" onClick={prevSlide}><FaArrowLeft /></button>
-        <button className="hero-arrow right" onClick={nextSlide}><FaArrowRight /></button>
       </section>
 
       {/* ===== Seção de Serviços ===== */}
@@ -162,7 +107,7 @@ export function Home() {
 
       {/* ===== Seção Alunos ===== */}
       <section className="students-section" aria-label="Equipe de alunos do projeto">
-        <h2>Nosso Time de Alunos</h2>
+        <h2> Os Alunos</h2>
         <div className="students-grid">
           {[
             {

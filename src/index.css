@@ -78,7 +78,7 @@ a:hover {
 
 .nav-btn:hover {
   background-color: #ff6a00;
-  color: #fdfdfd;
+  color: #fcd090;
 }
 
 /* Ferramentas à direita */
@@ -94,7 +94,7 @@ a:hover {
   gap: 0.4rem;
   background: transparent;
   border: none;
-  color: #fff;
+  color: #ffffff;
   font-weight: bold;
   text-decoration: none;
   font-size: 0.9rem;
@@ -110,7 +110,6 @@ a:hover {
 .tool-btn:hover,
 .tool-btn:focus {
   background-color: rgba(0, 0, 255, 0.2);
-  outline: 3px solid #fff;
   outline-offset: 2px;
 }
 
@@ -194,28 +193,37 @@ a:hover {
 .hero-arrow:hover {
   background: rgba(255,255,255,0.4);
 }
+.hero-carousel {
+  position: relative;
+  height: 550px;
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+}
 
-.accessibility-btn {
+.hero-video {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  background-color: #0450a1;
-  color: #ffffff;
-  border: none;
-  padding: 0.9rem;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 4;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  transition: background 0.3s;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* cobre toda a área */
+  filter: brightness(0.4); /* escurece para o texto aparecer */
+  z-index: 1;
 }
 
-.accessibility-btn:hover {
-  background-color: #02336b;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  margin-left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
+
 .students-section {
   padding: 4rem 2rem;
-  background: #f7f9fc;
+  background: #cedef6;
   text-align: center;
 }
 
