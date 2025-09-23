@@ -6,13 +6,14 @@ export function Home(){
   const [open, setOpen] = useState<null | 'agendar' | 'chat' | 'resultados'>(null)
 
   return (
-    <main className="container">
-      <section className="section text-center">
-        <h1 className="text-3xl md:text-5xl font-bold text-brand">Telemedicina IMREA HC</h1>
-        <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
-          Atendimento online humanizado e seguro — agende consultas, acesse resultados e fale com nossos profissionais.
-        </p>
-      </section>
+    <main className="Hero">
+      <section className="hero">
+  <h1>Telemedicina IMREA HC</h1>
+  <p>
+    Atendimento online humanizado e seguro – agende consultas,
+    acesse resultados e fale com nossos profissionais.
+  </p>
+</section>
 
       <section className="pb-12">
         <Carousel slides={[

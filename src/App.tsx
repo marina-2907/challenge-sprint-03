@@ -21,7 +21,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-brand-50 to-white">
       {/* Cabeçalho fixo com navegação */}
       <Header />
-
+      
       {/* Conteúdo principal */}
       <main className="flex-1 px-4 py-6 sm:px-8 md:px-16 lg:px-24">
         {ready ? (

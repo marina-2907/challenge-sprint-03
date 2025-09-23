@@ -34,6 +34,8 @@ a:hover {
    🏠 LAYOUT
    =========================== */
 /* ===== HEADER LAYOUT ===== */
+/* ===== HEADER LAYOUT ===== */
+/* ===== HEADER LAYOUT ===== */
 .header-container {
   display: flex;
   align-items: center;
@@ -43,15 +45,15 @@ a:hover {
   height: 72px;
 }
 
-/* Logos lado a lado no canto esquerdo */
+/* LOGOS lado a lado (esquerda) */
 .header-left {
   display: flex;
   align-items: center;
-  gap: 1.2rem; /* espaçamento entre as duas imagens */
+  gap: 1.2rem;
 }
 
 .header-left img {
-  height: 40px;  /* tamanho das logos */
+  height: 60px;
   width: auto;
   transition: transform 0.2s ease;
 }
@@ -69,33 +71,76 @@ a:hover {
 
 .nav-btn {
   padding: 0.4rem 1.2rem;
-  border: 2px solid #fff;
+  border: 2px solid #ffffff;
   border-radius: 6px;
   font-weight: bold;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .nav-btn:hover {
-  background-color: #fff;
-  color: #0450a1;
+  background-color: #ff6a00;
+  color: #fdfdfd;
 }
 
-/* Ícone de login à direita */
-.header-right .login-icon {
-  border: 2px solid #fff;
-  border-radius: 50%;
-  padding: 0.4rem 0.55rem;
+/* ===== NOVAS FERRAMENTAS À DIREITA ===== */
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
   color: #fff;
-  font-size: 1.3rem;
-  transition: background-color 0.2s, color 0.2s;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.header-right .login-icon:hover {
-  background-color: #fff;
-  color: #0450a1;
+.tool-btn .icon {
+  font-size: 1.2rem;
 }
+
+.tool-btn:hover,
+.tool-btn:focus {
+  background-color: rgba(0, 0, 255, 0.197);
+  outline: 3px solid rgb(255, 255, 255); /* foco visível para acessibilidade */
+  outline-offset: 2px;
+}
+/* === Faixa de destaque (hero) === */
+.hero {
+  background: linear-gradient(90deg, #e67002 0%, #ff8c00 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2rem 2rem;         /* mais altura e respiro */
+  border-radius: 0 0 12px 12px; /* cantos arredondados na parte de baixo */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero h1 {
+  font-size: 2.8rem;          /* título maior */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;  /* opcional para mais impacto */
+  letter-spacing: 1px;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
 
 footer {
   background: #1e3a8a;

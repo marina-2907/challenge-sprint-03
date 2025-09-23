@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import "./index.css"; // vamos criar esse CSS abaixo
+import { FaUserCircle, FaSearch, FaBars } from "react-icons/fa";
 
 export function Header() {
   return (
     <header className="header-container">
+      {/* LOGOS ESQUERDA */}
       <div className="header-left">
         <Link to="/">
           <img src="public/imgs/image imrea 2.png" alt="Logo HC" />
@@ -13,6 +14,7 @@ export function Header() {
         </Link>
       </div>
 
+      {/* NAVEGAÇÃO CENTRAL */}
       <nav className="header-nav">
         <Link to="/agendar" className="nav-btn">Agendar Consulta</Link>
         <Link to="/chat" className="nav-btn">Nosso Chat</Link>
@@ -20,11 +22,24 @@ export function Header() {
         <Link to="/contato" className="nav-btn">Contato</Link>
       </nav>
 
-      <div className="header-right">
-        <Link to="/login" className="login-icon">
-          <i className="fa-solid fa-user"></i>
+      {/* NOVAS FERRAMENTAS À DIREITA */}
+      <div className="header-tools">
+        <Link to="/login" className="tool-btn" aria-label="Entrar">
+          <FaUserCircle className="icon" aria-hidden="true" />
+          <span>ENTRAR</span>
         </Link>
+
+        <Link to="/buscar" className="tool-btn" aria-label="Buscar">
+          <FaSearch className="icon" aria-hidden="true" />
+          <span>BUSCAR</span>
+        </Link>
+
+        <button className="tool-btn" aria-label="Abrir menu">
+          <FaBars className="icon" aria-hidden="true" />
+        </button>
       </div>
     </header>
   );
 }
+
+
