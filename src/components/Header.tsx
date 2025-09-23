@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUserCircle, FaSearch, FaBars } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 export function Header() {
   return (
@@ -22,24 +22,14 @@ export function Header() {
         <Link to="/contato" className="nav-btn">Contato</Link>
       </nav>
 
-      {/* NOVAS FERRAMENTAS À DIREITA */}
+      {/* FERRAMENTAS À DIREITA (apenas login) */}
       <div className="header-tools">
         <Link to="/login" className="tool-btn" aria-label="Entrar">
           <FaUserCircle className="icon" aria-hidden="true" />
           <span>ENTRAR</span>
         </Link>
-
-        <Link to="/buscar" className="tool-btn" aria-label="Buscar">
-          <FaSearch className="icon" aria-hidden="true" />
-          <span>BUSCAR</span>
-        </Link>
-
-        <button className="tool-btn" aria-label="Abrir menu">
-          <FaBars className="icon" aria-hidden="true" />
-        </button>
       </div>
     </header>
   );
 }
-
 
