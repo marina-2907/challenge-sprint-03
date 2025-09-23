@@ -1,17 +1,14 @@
-import { Home } from './pages/Home';
-import { AgendarConsulta } from './pages/AgendarConsulta';
-import { Chat } from './pages/Chat';
-import { Resultados } from './pages/Resultados';
-import { Contato } from './pages/Contato'
-import { Login } from './pages/Login';
-import { Buscar } from './pages/Buscar'
+import type { RouteObject } from "react-router-dom";
+import { Home } from "./pages/Home"; // <== O NOME tem que bater 100% com o arquivo
+import { Chat } from "./pages/Chat";
+import { AgendarConsulta } from "./pages/AgendarConsulta";
+import { Resultados } from "./pages/Resultados";
+import { Login } from "./pages/Login";
 
-export const routes = [
-  { path: '/', element: <Home /> },
-  { path: '/agendar-consulta', element: <AgendarConsulta /> },
-  { path: '/chat', element: <Chat /> },
-  { path: '/resultados', element: <Resultados /> },
-  { path: '/contato', element: <Contato /> },
-  { path: '/Login', element: <Login /> },
-  { path: '/buscar', element: <Buscar /> },
+export const routes: RouteObject[] = [
+  { path: "/", element: <Home /> },
+  { path: "/chat", element: <Chat/> },
+  { path: "/AgendarConsulta", element: <AgendarConsulta /> },
+  { path: "/resultados", element: <Resultados /> },
+  { path: "/login", element: <Login /> },
 ];
