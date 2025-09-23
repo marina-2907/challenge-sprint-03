@@ -1,25 +1,35 @@
+import './Resultados.css'; 
+import { useNavigate } from 'react-router-dom'; 
+
 export function Resultados(){
+  const navigate = useNavigate(); 
+
   const click = (type: string) => {
-    if(type === 'receitas'){ alert('Baixar receita: receita-medica.txt') }
-    else { alert(`Sem resultados de ${type} por enquanto.`) }
-  }
+    if (type === 'receitas') {
+      alert('Baixar receita: receita-medica.txt');
+    } else if (type === 'voltar') {
+      navigate('/'); 
+    } else {
+      alert(`Sem resultados de ${type} por enquanto.`);
+    }
+  };
 
   const item = (img: string, label: string, key: string) => (
-    <button onClick={()=>click(key)} className="card hover:shadow-lg flex flex-col items-center">
-      <img src={img} alt={label} className="h-28 w-28 object-cover rounded-xl"/>
-      <span className="mt-2 font-medium">{label}</span>
+    <button onClick={() => click(key)} className="card">
+      <img src={img} alt={label}/>
+      <span>{label}</span>
     </button>
-  )
+  );
 
   return (
     <section className="container section">
-      <h1 className="text-3xl font-bold">Resultados do Paciente</h1>
-      <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {item('/exame.jpg','Exames','exames')}
-        {item('/laudo.jpg','Laudos','laudos')}
-        {item('/receita.avif','Receitas','receitas')}
-        {item('/voltar.png','Voltar','voltar')}
+      <h1>Resultados do Paciente</h1>
+      <div className="grid">
+        {item('imgs/exame.jpg','Exames','exames')}
+        {item('imgs/laudo.jpg','Laudos','laudos')}
+        {item('imgs/receita.avif','Receitas','receitas')}
+        {item('imgs/voltar.png','Voltar','voltar')}
       </div>
     </section>
-  )
+  );
 }

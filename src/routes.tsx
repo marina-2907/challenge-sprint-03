@@ -1,18 +1,17 @@
-import type { RouteObject } from "react-router-dom";
-import { Home } from "./pages/Home"; // <== O NOME tem que bater 100% com o arquivo
-import { About } from "./pages/About";
-import { Chat } from "./pages/Chat";
-import { AgendarConsulta } from "./pages/AgendarConsulta";
-import { Contact } from "./pages/Contact";
-import { Resultados } from "./pages/Resultados";
-import { Login } from "./pages/Login";
+import { Home } from './pages/Home';
+import { AgendarConsulta } from './pages/AgendarConsulta';
+import { Chat } from './pages/Chat';
+import { Resultados } from './pages/Resultados';
+import { Contato } from './pages/Contato'
+import { Login } from './pages/Login';
+import { Buscar } from './pages/Buscar'
 
-export const routes: RouteObject[] = [
-  { path: "/", element: <Home /> },
-  { path: "/about", element: <About /> },
-  { path: "/chat", element: <Chat/> },
-  { path: "/AgendarConsulta", element: <AgendarConsulta /> },
-  { path: "/contact", element: <Contact /> },
-  { path: "/resultados", element: <Resultados /> },
-  { path: "/login", element: <Login /> },
+export const routes = [
+  { path: '/', element: <Home /> },
+  { path: '/agendar-consulta', element: <AgendarConsulta /> },
+  { path: '/chat', element: <Chat /> },
+  { path: '/resultados', element: <Resultados /> },
+  { path: '/contato', element: <Contato /> },
+  { path: '/Login', element: <Login /> },
+  { path: '/buscar', element: <Buscar /> },
 ];

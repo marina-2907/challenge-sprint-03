@@ -155,7 +155,7 @@ a:hover {
 }
 
 .btn-hero {
-  background: linear-gradient(90deg, #ff8c00, #e63946);
+  background: linear-gradient(90deg, #0073ff, #3445e1);
   color: #ffffff;
   padding: 0.9rem 2rem;
   font-size: 1.1rem;
@@ -163,13 +163,13 @@ a:hover {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(230, 57, 70, 0.5);
+  box-shadow: 0 8px 20px rgba(57, 146, 230, 0.5);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .btn-hero:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(230, 57, 70, 0.7);
+  box-shadow: 0 12px 30px rgba(230, 135, 57, 0.7);
 }
 
 .hero-arrow {
@@ -220,6 +220,69 @@ a:hover {
   color: #fff;
   text-shadow: 0 2px 6px rgba(0,0,0,0.6);
 }
+.about-section {
+  padding: 5rem 2rem;
+  background: #f5f7fa;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* imagem e texto lado a lado */
+  gap: 4rem;
+  align-items: center;
+}
+
+/* ===== Imagem principal ===== */
+.about-image img {
+  width: 100%;
+  border-radius: 1.2rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+/* Miniaturas abaixo da imagem principal */
+.about-thumbs {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.about-thumbs img {
+  width: 48%;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-thumbs img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Texto ===== */
+.about-text h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 1.5rem;
+}
+
+.about-text p {
+  font-size: 1.15rem;
+  color: #374151;
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+}
+
+.about-text strong {
+  color: #1e3a8a;
+}
+
+
 
 .students-section {
   padding: 4rem 2rem;
@@ -380,10 +443,12 @@ a:hover {
 footer {
   background: #1e3a8a;
   color: #f1f5f9;
-  padding: 2rem;
+  padding: 1.5rem 1rem;
   text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  width: 100%;
 }
-
 /* ===========================
    🎯 BUTTONS
    =========================== */
@@ -457,9 +522,7 @@ form textarea:focus {
 /* ===========================
    AGENDAR CONSULTAS 
    =========================== */
-/* ===============================
-   📅 PÁGINA DE AGENDAMENTO
-   =============================== */
+
 .agenda-page {
   padding: 4rem 1rem;
   background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);

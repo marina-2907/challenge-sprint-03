@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import './AgendarConsulta.css';
 export function AgendarConsulta() {
   const [form, setForm] = useState({
     nome: '',

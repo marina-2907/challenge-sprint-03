@@ -3,7 +3,7 @@ import { Modal } from '../components/Modal'
 
 
 export function Home() {
-  const [open, setOpen] = useState<null | 'agendar' | 'chat' | 'resultados'>(null)
+  const [open, setOpen] = useState<null | 'agendarConsultas' | 'chat' | 'resultados'>(null)
   const slides = [
     'public/videos/video 1.mp4', // coloque o arquivo em public/videos/video1.mp4
   ]
@@ -44,14 +44,55 @@ export function Home() {
         />
 
         <div className="hero-content">
-          <h1>Telemedicina IMREA + HC</h1>
-          <p>
-            Atendimento online humanizado e seguro – agende consultas,
-            acesse resultados e fale com nossos profissionais.
-          </p>
-          <button className="btn-hero">Clique aqui e saiba mais!</button>
+        <h1>Telemedicina IMREA + HC</h1>
+        <p>
+        Atendimento online humanizado e seguro – agende consultas,
+        acesse resultados e fale com nossos profissionais.
+        </p>
+        <a href="#sobre-nos" className="btn-hero">Clique aqui e saiba mais!</a>
         </div>
+
       </section>
+
+
+{/* ===== Seção Sobre Nós ===== */}
+<section className="about-section" id="sobre-nos">
+  <div className="about-container">
+    {/* Coluna da Imagem */}
+    <div className="about-image">
+      <img
+        src="public/imgs/apresentação.jpeg"
+        alt="Equipe desenvolvendo o projeto"
+      />
+      <div className="about-thumbs">
+        <img src="public/imgs/imrea 2.webp" alt="Equipe em reunião" />
+        <img src="public/imgs/paciente 01.webp" alt="Apresentação do projeto" />
+      </div>
+    </div>
+
+    {/* Coluna do Texto */}
+    <div className="about-text">
+      <h2>Sobre Nós</h2>
+      <p>
+        Somos um grupo de estudantes da FIAP apaixonados por tecnologia e inovação.
+        Nosso objetivo é criar soluções que tornem a saúde mais acessível,
+        inclusiva e humana, unindo experiência do usuário e eficiência técnica.
+      </p>
+      <p>
+        Este projeto de <strong>Telemedicina</strong> nasceu com a missão
+        de facilitar agendamentos, consultas e o acesso a resultados
+        de exames, garantindo segurança e praticidade para pacientes
+        e profissionais de saúde.
+      </p>
+      <p>
+        Acreditamos que <strong>inovação</strong> e <strong>empatia</strong>
+        andam juntas para transformar a forma como as pessoas cuidam da saúde.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
       {/* ===== Seção de Serviços ===== */}
       <section className="services-pro">
@@ -91,7 +132,7 @@ export function Home() {
       </section>
 
       {/* ===== Modais ===== */}
-      <Modal title="Agendar Consulta" isOpen={open === 'agendar'} onClose={() => setOpen(null)}>
+      <Modal title="Agendar Consulta" isOpen={open === 'agendarConsultas'} onClose={() => setOpen(null)}>
         <p className="text-gray-600 mb-4">Preencha seus dados. (Validação por Hook + Typescript)</p>
         <a className="text-accent underline" href="/contact">Ir para Contato</a>
       </Modal>
