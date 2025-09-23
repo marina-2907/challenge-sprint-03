@@ -1,13 +1,16 @@
 import { useState, useEffect } from 'react'
 import { Modal } from '../components/Modal'
+import './Contato.css'
+import './Agendar.css'
+
+
+type ModalKey = 'agendar' | 'contato' | 'chat' | 'resultados' | null
 
 export function Home() {
-  const [open, setOpen] = useState<null | 'agendarConsultas' | 'chat' | 'resultados'>(null)
-  const [pacienteNome, setPacienteNome] = useState<string | null>(null) // 👈 novo estado
+  const [open, setOpen] = useState<ModalKey>(null)
+  const [pacienteNome, setPacienteNome] = useState<string | null>(null)
 
-  const slides = [
-    'public/videos/video 1.mp4',
-  ]
+  const slides = ['public/videos/video 1.mp4']
   const [current, setCurrent] = useState(0)
 
   // troca automática de vídeo
@@ -18,25 +21,13 @@ export function Home() {
     return () => clearInterval(timer)
   }, [slides.length])
 
-  // injeta o widget de acessibilidade
-  useEffect(() => {
-    const s = document.createElement('script')
-    s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'
-    s.async = true
-    document.body.appendChild(s)
-    return () => {
-      document.body.removeChild(s)
-    }
-  }, [])
 
-
-  // 👇 recupera o nome do paciente salvo no login
+  // recupera o nome do paciente salvo no login
   useEffect(() => {
     const nome = localStorage.getItem('pacienteNome')
     if (nome) setPacienteNome(nome)
   }, [])
 
-  
   return (
     <main className="Hero">
       {/* ===== Hero com vídeo de fundo ===== */}
@@ -50,9 +41,7 @@ export function Home() {
           loop
           playsInline
         />
-
         <div className="hero-content">
-          {/* 👇 saudação aparece se o paciente tiver feito login */}
           {pacienteNome && <h2 className="bem-vindo">Olá, {pacienteNome}!</h2>}
 
           <h1>Telemedicina IMREA + HC</h1>
@@ -74,7 +63,6 @@ export function Home() {
               <img src="public/imgs/paciente 01.webp" alt="Apresentação do projeto" />
             </div>
           </div>
-
           <div className="about-text">
             <h2>Sobre Nós</h2>
             <p>
@@ -100,9 +88,7 @@ export function Home() {
       <section className="services-pro">
         <div className="services-header">
           <h2>Nossos Serviços</h2>
-          <p>
-            Atendimento de qualidade para você e sua família, com tecnologia e segurança.
-          </p>
+          <p>Atendimento de qualidade para você e sua família, com tecnologia e segurança.</p>
         </div>
 
         <div className="services-grid-pro">
@@ -111,34 +97,32 @@ export function Home() {
               title: 'Agendamento Online',
               icon: '📅',
               desc: 'Agende consultas e procedimentos em poucos cliques. Confirmação imediata e lembretes automáticos para evitar esquecimentos.',
+              action: () => setOpen('agendar')
             },
             {
               title: 'Chat com Profissionais',
               icon: '💬',
               desc: 'Fale com nossa equipe em tempo real para esclarecer dúvidas e receber orientações de forma segura e confidencial.',
+              action: () => setOpen('chat')
             },
             {
               title: 'Resultados Online',
               icon: '📄',
               desc: 'Acesse laudos e exames com login protegido, podendo compartilhar com seu médico ou salvar para acompanhar seu histórico.',
+              action: () => setOpen('resultados')
             },
           ].map(card => (
             <article key={card.title} className="service-card-pro">
               <div className="service-icon-pro">{card.icon}</div>
               <h3>{card.title}</h3>
               <p>{card.desc}</p>
-              <button className="service-btn-pro">Saiba mais</button>
+              
             </article>
           ))}
         </div>
       </section>
 
       {/* ===== Modais ===== */}
-      <Modal title="Agendar Consulta" isOpen={open === 'agendarConsultas'} onClose={() => setOpen(null)}>
-        <p className="text-gray-600 mb-4">Preencha seus dados. (Validação por Hook + Typescript)</p>
-        <a className="text-accent underline" href="/contact">Ir para Contato</a>
-      </Modal>
-
       <Modal title="Nosso Chat" isOpen={open === 'chat'} onClose={() => setOpen(null)}>
         <p className="text-gray-600">Acesse nosso canal oficial.</p>
         <a className="text-accent underline" href="#" rel="noreferrer">Abrir chat</a>
