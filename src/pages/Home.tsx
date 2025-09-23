@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Modal } from '../components/Modal'
 
+
 export function Home() {
   const [open, setOpen] = useState<null | 'agendar' | 'chat' | 'resultados'>(null)
   const slides = [
@@ -43,7 +44,7 @@ export function Home() {
         />
 
         <div className="hero-content">
-          <h1>Telemedicina IMREA HC</h1>
+          <h1>Telemedicina IMREA + HC</h1>
           <p>
             Atendimento online humanizado e seguro – agende consultas,
             acesse resultados e fale com nossos profissionais.
