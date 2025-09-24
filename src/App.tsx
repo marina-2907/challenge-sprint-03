@@ -16,16 +16,15 @@ export default function App() {
   const element = useRoutes(routes);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-brand-50 to-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-brand-10 to-white">
       <Header />
-      <main className="flex-1 px-4 py-6 sm:px-8 md:px-16 lg:px-24">
+      <main>
         {ready ? (
           element
         ) : (
           <p className="text-center text-gray-500">Carregando...</p>
         )}
       </main>
-     
      <Footer />
     </div>
   );

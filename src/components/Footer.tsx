@@ -1,8 +1,8 @@
 export function Footer() {
   return (
-    <footer className="bg-blue-800 text-white py-6 mt-16">
+    <footer className="bg-blue-800 text-white py-6">
       <div className="container mx-auto text-center">
-        &copy; {new Date().getFullYear()} IMREA – Todos os direitos reservados.
+       &copy;2025 Hospital IMREA + HC. Todos os direitos reservados. FIAP
       </div>
     </footer>
   );

@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./LoginFancy.css";
 
 export function LoginFancy() {
   const navigate = useNavigate();
   const [showPwd, setShowPwd] = useState(false);
+  const [modo, setModo] = useState<"login" | "signup">("login");
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
+    confirm: "",
     remember: true,
   });
-  const [errors, setErrors] = useState<{[k:string]: string}>({});
+  const [errors, setErrors] = useState<{ [k: string]: string }>({});
 
   function validate() {
     const e: typeof errors = {};
     if (!form.name.trim()) e.name = "Informe seu nome";
     if (!/.+@.+\..+/.test(form.email)) e.email = "E-mail inválido";
     if (form.password.length < 6) e.password = "Mínimo 6 caracteres";
+    if (modo === "signup" && form.password !== form.confirm)
+      e.confirm = "As senhas não coincidem";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
@@ -25,121 +28,189 @@ export function LoginFancy() {
   function submit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
-
-    // guarda o nome p/ dar "Olá, Fulano!" na Home
     localStorage.setItem("pacienteNome", form.name);
+    if (modo === "signup") alert("🎉 Conta criada com sucesso!");
     navigate("/");
   }
 
   return (
-    <main className="loginf-wrap">
-      {/* fundo animado */}
-      <div className="loginf-bg" aria-hidden />
+    <main className="min-h-screen grid place-items-center relative p-8 text-[var(--ink)] overflow-hidden">
+      {/* Fundo animado */}
+      <div className="absolute inset-0 animate-floatBg bg-[radial-gradient(60%_60%_at_10%_10%,#a7c1ff55_0%,transparent_60%),radial-gradient(60%_60%_at_90%_20%,#7cf6ff40_0%,transparent_60%),radial-gradient(70%_70%_at_50%_100%,#b388ff33_0%,transparent_60%),linear-gradient(180deg,#eef2ff_0%,#ffffff_70%)] saturate-110" />
 
-      <section className="loginf-card">
-        {/* Lado esquerdo: destaque */}
-        <aside className="loginf-hero">
-          <div className="logo-badge">
-            <img src="/imgs/NOVO-LOGO-HC-2022.png" alt="IMREA" />
-          </div>
-          <h1>
-            Acesse sua conta
-            <span>Telemedicina IMREA + HC</span>
+      {/* Card glass */}
+      <section className="relative w-full max-w-[1100px] grid md:grid-cols-[1.1fr_1fr] bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden">
+        {/* Lado esquerdo - Hero */}
+        <aside className="hidden md:flex flex-col justify-center gap-5 p-10 bg-[linear-gradient(180deg,rgba(30,58,138,0.12),rgba(37,99,235,0.1))] bg-cover">
+          <h1 className="text-[var(--brand)] text-3xl leading-tight font-bold">
+            {modo === "login" ? "Acesse sua conta" : "Crie sua conta"}
+            <span className="block text-[var(--brand-2)] font-extrabold">
+              Telemedicina IMREA + HC
+            </span>
           </h1>
-          <p>
-            Resultados, consultas e teleatendimento em um só lugar.
-            Experiência segura e humanizada.
+          <p className="opacity-80">
+            Resultados, consultas e teleatendimento em um só lugar. Experiência
+            segura e humanizada.
           </p>
-
-          <ul className="perks">
+          <ul className="grid gap-1 text-[var(--ink)] font-medium">
             <li>✔️ Resultados e laudos</li>
             <li>✔️ Agendamentos rápidos</li>
             <li>✔️ Telemedicina</li>
           </ul>
-
-          <div className="mockup">
-            <img src="/imgs/app-preview.png" alt="Prévia do app" />
-          </div>
         </aside>
 
-        {/* Lado direito: formulário */}
-        <form className="loginf-form" onSubmit={submit} noValidate>
-          <h2>Bem-vindo(a) 👋</h2>
-          <p className="muted">Entre para continuar</p>
+        {/* Lado direito - Formulário */}
+        <form
+          onSubmit={submit}
+          className={`flex flex-col gap-4 p-10 transition-all duration-300 ${
+            modo === "signup" ? "bg-white/95 shadow-2xl" : "bg-white/85"
+          }`}
+        >
+          <h2 className="text-2xl font-bold text-[var(--ink)]">
+            {modo === "login" ? "Bem-vindo(a) 👋" : "Criar Conta"}
+          </h2>
+          <p className="text-[var(--muted)]">
+            {modo === "login"
+              ? "Entre para continuar"
+              : "Preencha os campos para criar sua conta"}
+          </p>
 
-          <label className={errors.name ? "field error" : "field"}>
-            <span>Nome completo</span>
+          {/* Nome */}
+          <label className={`flex flex-col gap-1 ${errors.name && "text-red-500"}`}>
+            <span className="font-semibold text-slate-900">Nome completo</span>
             <input
-              type="text"
-              placeholder="Seu nome"
+              className="rounded-xl border border-slate-300 p-3 focus:border-[var(--brand-2)] focus:ring-4 focus:ring-blue-200 outline-none"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
-            {errors.name && <small>{errors.name}</small>}
+            {errors.name && <small className="font-semibold">{errors.name}</small>}
           </label>
 
-          <label className={errors.email ? "field error" : "field"}>
-            <span>E-mail</span>
+          {/* Email */}
+          <label className={`flex flex-col gap-1 ${errors.email && "text-red-500"}`}>
+            <span className="font-semibold text-slate-900">E-mail</span>
             <input
               type="email"
               placeholder="voce@exemplo.com"
+              className="rounded-xl border border-slate-300 p-3 focus:border-[var(--brand-2)] focus:ring-4 focus:ring-blue-200 outline-none"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
-            {errors.email && <small>{errors.email}</small>}
+            {errors.email && <small className="font-semibold">{errors.email}</small>}
           </label>
 
-          <label className={errors.password ? "field error" : "field"}>
-            <span>Senha</span>
-            <div className="pwd-wrap">
+          {/* Senha */}
+          <label className={`flex flex-col gap-1 ${errors.password && "text-red-500"}`}>
+            <span className="font-semibold text-slate-900">Senha</span>
+            <div className="relative">
               <input
                 type={showPwd ? "text" : "password"}
                 placeholder="••••••••"
+                className="w-full rounded-xl border border-slate-300 p-3 pr-12 focus:border-[var(--brand-2)] focus:ring-4 focus:ring-blue-200 outline-none"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
               <button
                 type="button"
-                className="toggle"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                 onClick={() => setShowPwd((s) => !s)}
-                aria-label={showPwd ? "Ocultar senha" : "Mostrar senha"}
               >
                 {showPwd ? "🙈" : "👁️"}
               </button>
             </div>
-            {errors.password && <small>{errors.password}</small>}
+            {errors.password && (
+              <small className="font-semibold">{errors.password}</small>
+            )}
           </label>
 
-          <div className="row">
-            <label className="chk">
+          {/* Confirmar senha (signup) */}
+          {modo === "signup" && (
+            <label className={`flex flex-col gap-1 ${errors.confirm && "text-red-500"}`}>
+              <span className="font-semibold text-slate-900">Confirmar Senha</span>
               <input
-                type="checkbox"
-                checked={form.remember}
-                onChange={(e) => setForm({ ...form, remember: e.target.checked })}
+                type="password"
+                placeholder="Repita a senha"
+                className="rounded-xl border border-slate-300 p-3 focus:border-[var(--brand-2)] focus:ring-4 focus:ring-blue-200 outline-none"
+                value={form.confirm}
+                onChange={(e) => setForm({ ...form, confirm: e.target.value })}
               />
-              <span>Lembrar-me</span>
+              {errors.confirm && (
+                <small className="font-semibold">{errors.confirm}</small>
+              )}
             </label>
-            <a className="link" href="#esqueci">Esqueci a senha</a>
-          </div>
+          )}
 
-          <button className="primary" type="submit">
-            Entrar
+          {modo === "login" && (
+            <div className="flex items-center justify-between text-slate-900">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={form.remember}
+                  onChange={(e) =>
+                    setForm({ ...form, remember: e.target.checked })
+                  }
+                />
+                Lembrar-me
+              </label>
+              <a href="#esqueci" className="text-[var(--brand-2)] font-semibold hover:underline">
+                Esqueci a senha
+              </a>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className={`mt-2 rounded-xl bg-gradient-to-r from-[var(--brand)] to-[var(--brand-2)] text-white font-extrabold py-3 shadow-lg hover:-translate-y-1 transition ${
+              modo === "signup" ? "shadow-indigo-400/40" : ""
+            }`}
+          >
+            {modo === "login" ? "Entrar" : "Criar Conta"}
           </button>
 
-          <div className="divider"><span>ou</span></div>
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-slate-500">
+            <span className="h-px bg-slate-200" />
+            ou
+            <span className="h-px bg-slate-200" />
+          </div>
 
-          <div className="socials">
-            <button type="button" className="social google">
-              <img src="/imgs/google.svg" alt="" /> Entrar com Google
+          <div className="grid gap-3">
+            <button
+              type="button"
+              className="flex items-center justify-center gap-2 border border-slate-300 rounded-xl p-3 bg-white hover:bg-slate-50"
+            >
+              <img src="public/imgs/G.png" alt="" className="w-5 h-5" /> Entrar com Google
             </button>
-            <button type="button" className="social apple">
-              <img src="/imgs/apple.svg" alt="" /> Entrar com Apple
+            <button
+              type="button"
+              className="flex items-center justify-center gap-2 border border-slate-300 rounded-xl p-3 bg-white hover:bg-slate-50"
+            >
+              <img src="public/imgs/icloud.jpg" alt="" className="w-5 h-5" /> Entrar com Apple
             </button>
           </div>
 
-          <p className="signup">
-            Não tem conta? <a className="link" href="#criar">Criar conta</a>
-          </p>
+          {modo === "login" ? (
+            <p className="text-slate-600 mt-1">
+              Não tem conta?{" "}
+              <button
+                type="button"
+                className="text-[var(--brand-2)] font-bold hover:underline"
+                onClick={() => setModo("signup")}
+              >
+                Criar conta
+              </button>
+            </p>
+          ) : (
+            <p className="text-slate-600 mt-1">
+              Já tem conta?{" "}
+              <button
+                type="button"
+                className="text-[var(--brand-2)] font-bold hover:underline"
+                onClick={() => setModo("login")}
+              >
+                Entrar
+              </button>
+            </p>
+          )}
         </form>
       </section>
     </main>

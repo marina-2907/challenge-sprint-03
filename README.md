@@ -1,71 +1,44 @@
-# React + TypeScript + Vite
+# 🌐 Challenge Sprint 03 – React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi desenvolvido para o **Challenge Sprint 03** da FIAP, utilizando **React**, **TypeScript** e **Vite**.  
+O objetivo é criar uma aplicação moderna e performática, com Hot Module Replacement (HMR) e padronização de código via **ESLint**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+-  **React** – Biblioteca para criação de interfaces de usuário.
+-  **TypeScript** – Superset do JavaScript que adiciona tipagem estática.
+-  **Vite** – Bundler rápido para desenvolvimento com suporte a HMR.
+-  **TailwindCSS** – Framework utilitário para estilização.
+-  **ESLint** – Padronização e qualidade do código.
+-  **React Router DOM** – Gerenciamento de rotas e navegação SPA.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Estrutura do Projeto
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+chellange-sprint-03/
+├─ public/ # Imagens e Videos
+├─ src/
+│ ├─ components/ # Componentes reutilizáveis (Carousel, Footer, FormField, Header e Modal.)
+│ ├─ hooks/ # ( useForm. )
+│ ├─ pages/ # Páginas principais (Home, Agendar, Chat, Contato, Login e Resultados.)
+│ ├─ App.tsx # Componente raiz da aplicação
+│ ├─ main.tsx # Ponto de entrada da aplicação
+│ └─ index.css # Estilos globais (TailwindCSS)
+├─ package.json # Dependências e scripts
+└─ vite.config.ts # Configuração do Vite
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+##  Instalação e Execução
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1️⃣ Pré-requisitos
+- [Node.js](https://nodejs.org/) (versão LTS recomendada)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-# chellange-sprint-03
-# chellange-sprint-03
+### 2️⃣ Clonar o repositório
+```bash
+git clone https://github.com/marina-2907/chellange-sprint-03.git
+cd chellange-sprint-03
